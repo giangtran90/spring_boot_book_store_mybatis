@@ -20,4 +20,6 @@ public interface BookMapper {
 	BookEntity findBookById(Long id);
 
 	void updateBook(BookUpdateRequest bookUpdateRequest);
+
+	void deleteBookById(Long id);
 }

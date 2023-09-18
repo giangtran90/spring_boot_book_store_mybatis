@@ -38,4 +38,9 @@ public class BookService {
 		// TODO Auto-generated method stub
 		bookMapper.updateBook(bookUpdateRequest);
 	}
+
+	public void deleteBookById(Long id) {
+		// TODO Auto-generated method stub
+		bookMapper.deleteBookById(id);
+	}
 }

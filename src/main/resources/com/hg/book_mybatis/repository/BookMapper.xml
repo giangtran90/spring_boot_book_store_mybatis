@@ -44,4 +44,11 @@
 		SET name = #{name}, author = #{author}, price = #{price}, update_date = CURRENT_TIMESTAMP 
 		WHERE id = #{id}
 	</update>
+	
+	<!-- 削除 -->
+	<update id="deleteBookById">
+		UPDATE books 
+		SET delete_date = CURRENT_TIMESTAMP 
+		WHERE id = #{id}
+	</update>
 </mapper>
