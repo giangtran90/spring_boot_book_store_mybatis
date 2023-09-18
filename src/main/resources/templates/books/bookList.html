@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="common/head :: head_fragment(title = 'Available Books', links = ~{::link}, scripts = ~{::script})"></head>
+<body>
+	<nav th:replace="common/navbar :: nav_fragment()"></nav>
+	<div class="container my-5">
+		<form th:action="@{/search}" method="get">
+			Filter: <input type="text" name="keyword" id="keyword" size="50"
+				th:value="${keyword}" required /> &nbsp; <input type="submit"
+				value="Search" /> &nbsp; <input type="button" value="Clear"
+				id="btnClear" onclick="clearSearch()" />
+		</form>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">No</th>
+					<th scope="col">Name</th>
+					<th scope="col">Author</th>
+					<th scope="col">Price</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="book, iteration : ${books}">
+					<tr>
+						<th scope="row" th:text="${iteration.count}"></th>
+						<td th:text="${book.name}"></td>
+						<td th:text="${book.author}"></td>
+						<td th:text="${book.price}"></td>
+						<td><a style="color: green; border: none; background: none;"
+							class="btn btn-primary" th:href="@{my_list/__${book.id}__}"><i
+								class="fa-solid fa-plus"></i></a> <a style="color: blue"
+							th:href="@{edit_book/__${book.id}__}"><i
+								class="fa-regular fa-pen-to-square mx-2"></i></a> <a
+							style="color: red" th:href="@{delete/__${book.id}__}"
+							class="delete"><i class="fa-solid fa-trash mx-2"></i></a></td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+
+	
+	<script>
+		$(document).ready(function() {
+			$('.delete').on('click', function() {
+				var result = confirm("Bạn có chắc chắn muốn xoá?");
+				if (result) {
+					// Xoá dữ liệu
+					return true;
+				} else {
+					// Hủy xoá
+					return false;
+				}
+			});
+
+		});
+
+		function clearSearch() {
+			window.location = "[[@{/available_books}]]";
+		}
+	</script>
+</body>
+</html>
