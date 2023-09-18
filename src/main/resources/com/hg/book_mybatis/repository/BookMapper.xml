@@ -3,17 +3,39 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hg.book_mybatis.repository.BookMapper">
-  
-    <!-- 新規登録 -->
-    <insert id="save">
-        INSERT INTO books
-        	(name, author, price, create_date, update_date)
-        VALUES
-        	(#{name}, #{author}, #{price}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-    </insert>
-    
-    <!-- 全件検索 -->
-    <select id="fetchAllBooks" resultType="com.hg.book_mybatis.entity.BookEntity">
-    	SELECT * FROM books WHERE delete_date IS NULL
-    </select>
+
+	<!-- 新規登録 -->
+	<insert id="save">
+		INSERT INTO books
+		(name, author, price, create_date, update_date)
+		VALUES
+		(#{name}, #{author}, #{price}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+	</insert>
+
+	<!-- 全件検索 -->
+	<select id="fetchAllBooks"
+		resultType="com.hg.book_mybatis.entity.BookEntity">
+		SELECT * FROM books WHERE delete_date IS NULL
+	</select>
+
+	<!-- 条件指定検索（本の名前それとも作者） -->
+	<select id="fetchBooksByNameOrAuthor"
+		resultType="com.hg.book_mybatis.entity.BookEntity">
+		SELECT *
+		FROM books
+		WHERE
+		delete_date IS NULL
+		<if
+			test="(name!=null and name!='') or (author!=null and author!='')">
+			AND (name LIKE CONCAT('%',#{name},'%')) OR (author LIKE
+			CONCAT('%',#{author},'%'))
+		</if>
+	</select>
+	
+	<!-- 主キー検索 -->
+	<select id="findBookById"
+		resultType="com.hg.book_mybatis.entity.BookEntity">
+		SELECT * FROM books WHERE delete_date IS NULL AND id = #{id}
+	</select>
+
 </mapper>

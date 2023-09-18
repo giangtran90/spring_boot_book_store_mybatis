@@ -22,4 +22,14 @@ public class BookService {
 		// TODO Auto-generated method stub
 		return bookMapper.fetchAllBooks();
 	}
+
+	public List<BookEntity> fetchBooksByNameOrAuthor(String keyword) {
+		// TODO Auto-generated method stub
+		return bookMapper.fetchBooksByNameOrAuthor(keyword);
+	}
+
+	public BookEntity findBookById(Long id) {
+		// TODO Auto-generated method stub
+		return bookMapper.findBookById(id);
+	}
 }

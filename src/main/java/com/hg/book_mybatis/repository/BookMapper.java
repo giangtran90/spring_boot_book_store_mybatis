@@ -13,4 +13,8 @@ public interface BookMapper {
 	void save(BookAddRequest bookAddRequest);
 
 	List<BookEntity> fetchAllBooks();
+
+	List<BookEntity> fetchBooksByNameOrAuthor(String keyword);
+
+	BookEntity findBookById(Long id);
 }

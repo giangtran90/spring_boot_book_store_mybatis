@@ -9,7 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hg.book_mybatis.dto.BookAddRequest;
 import com.hg.book_mybatis.entity.BookEntity;
@@ -46,5 +48,19 @@ public class BookController {
 		}
 		bookService.save(bookAddRequest);
 		return "redirect:/available_books";
+	}
+	
+	@GetMapping("/search")
+	public String fetchBooksByNameOrAuthor(@RequestParam("keyword") String keyword, Model model) {
+		List<BookEntity> bookEntities = bookService.fetchBooksByNameOrAuthor(keyword);
+		model.addAttribute("books", bookEntities);
+		return "books/bookList";
+	}
+	
+	@GetMapping("/edit_book/{id}")
+	public String findBookById(@PathVariable("id") Long id, Model model) {
+		BookEntity bookEntity = bookService.findBookById(id);
+		model.addAttribute("book", bookEntity);
+		return "books/bookEdit";
 	}
 }

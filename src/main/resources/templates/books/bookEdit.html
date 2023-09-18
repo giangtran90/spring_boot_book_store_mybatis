@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="common/head :: head_fragment(title = 'Update Book', links = ~{::link}, scripts = ~{::script})"></head>
+<body>
+	<nav
+		th:replace="common/navbar :: nav_fragment(home='http://localhost:3003/',availableBook='http://localhost:3003/available_books',myBook='http://localhost:3003/my_books',register='http://localhost:3003/book_register')"></nav>
+
+	<div class="container my-5 col-sm-6 offset-sm-3"
+		style="border: 1px solid black">
+		<h1 class="text-center py-2">Edit Book Register</h1>
+		<form class="px-4" th:action="@{/update}" method="post"
+			th:object="${book}">
+			<input type="hidden" th:field="*{id}" />
+			<div class="mb-3">
+				<label for="name" class="form-label">Name</label> <input type="text"
+					class="form-control" name="name" th:field="*{name}">
+			</div>
+			<div class="mb-3">
+				<label for="author" class="form-label">Author</label> <input
+					type="text" class="form-control" name="author" th:field="*{author}">
+			</div>
+			<div class="mb-3">
+				<label for="author" class="form-label">Price</label> <input
+					type="text" class="form-control" name="price" th:field="*{price}">
+			</div>
+
+			<center class="py-3">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</center>
+		</form>
+	</div>
+
+</body>
+</html>
