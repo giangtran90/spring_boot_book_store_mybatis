@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hg.book_mybatis.dto.BookAddRequest;
+import com.hg.book_mybatis.dto.BookUpdateRequest;
 import com.hg.book_mybatis.entity.BookEntity;
 import com.hg.book_mybatis.repository.BookMapper;
 
@@ -31,5 +32,10 @@ public class BookService {
 	public BookEntity findBookById(Long id) {
 		// TODO Auto-generated method stub
 		return bookMapper.findBookById(id);
+	}
+
+	public void updateBook(BookUpdateRequest bookUpdateRequest) {
+		// TODO Auto-generated method stub
+		bookMapper.updateBook(bookUpdateRequest);
 	}
 }

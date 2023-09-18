@@ -38,4 +38,10 @@
 		SELECT * FROM books WHERE delete_date IS NULL AND id = #{id}
 	</select>
 
+	<!-- 更新 -->
+	<update id="updateBook">
+		UPDATE books 
+		SET name = #{name}, author = #{author}, price = #{price}, update_date = CURRENT_TIMESTAMP 
+		WHERE id = #{id}
+	</update>
 </mapper>

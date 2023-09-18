@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hg.book_mybatis.dto.BookAddRequest;
+import com.hg.book_mybatis.dto.BookUpdateRequest;
 import com.hg.book_mybatis.entity.BookEntity;
 import com.hg.book_mybatis.service.BookService;
 
@@ -62,5 +64,17 @@ public class BookController {
 		BookEntity bookEntity = bookService.findBookById(id);
 		model.addAttribute("book", bookEntity);
 		return "books/bookEdit";
+	}
+	
+	@RequestMapping("/update")
+	public String updateBook(@Validated @ModelAttribute BookUpdateRequest bookUpdateRequest, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("errors", bindingResult.getAllErrors());
+			BookEntity bookEntity = bookService.findBookById(bookUpdateRequest.getId());
+			model.addAttribute("book", bookEntity);
+			return "books/bookEdit";
+		}
+		bookService.updateBook(bookUpdateRequest);
+		return "redirect:/available_books";
 	}
 }

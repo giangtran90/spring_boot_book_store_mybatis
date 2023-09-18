@@ -9,6 +9,12 @@
 	<div class="container my-5 col-sm-6 offset-sm-3"
 		style="border: 1px solid black">
 		<h1 class="text-center py-2">Edit Book Register</h1>
+		<div th:if="${errors}">
+			<ul>
+				<li th:each="error : ${errors}"><span
+					th:text="${error.defaultMessage}"></span></li>
+			</ul>
+		</div>
 		<form class="px-4" th:action="@{/update}" method="post"
 			th:object="${book}">
 			<input type="hidden" th:field="*{id}" />
