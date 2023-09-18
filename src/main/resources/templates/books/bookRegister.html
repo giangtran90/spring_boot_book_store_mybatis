@@ -7,12 +7,12 @@
 	<div class="container my-5 col-sm-6 offset-sm-3"
 		style="border: 1px solid black">
 		<h1 class="text-center py-2">New Book Register</h1>
-		<!-- <div th:if="${errors}">
+		<div th:if="${errors}">
 			<ul>
 				<li th:each="error : ${errors}"><span
 					th:text="${error.defaultMessage}"></span></li>
 			</ul>
-		</div> -->
+		</div>
 		<form class="px-4" th:action="@{/save}" method="post" id="myForm">
 			<div class="mb-3">
 				<label for="name" class="form-label">Name</label> <input type="text"
