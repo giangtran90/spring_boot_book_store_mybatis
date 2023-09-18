@@ -18,6 +18,8 @@
 					<th scope="col">Name</th>
 					<th scope="col">Author</th>
 					<th scope="col">Price</th>
+					<th scope="col">Create Date</th>
+					<th scope="col">Update Date</th>
 					<th scope="col">Action</th>
 				</tr>
 			</thead>
@@ -28,6 +30,8 @@
 						<td th:text="${book.name}"></td>
 						<td th:text="${book.author}"></td>
 						<td th:text="${book.price}"></td>
+						<td th:text="${#dates.format(book.createDate, 'dd/MM/yyyy')}"></td>
+						<td th:text="${#dates.format(book.updateDate, 'dd/MM/yyyy')}"></td>
 						<td><a style="color: green; border: none; background: none;"
 							class="btn btn-primary" th:href="@{my_list/__${book.id}__}"><i
 								class="fa-solid fa-plus"></i></a> <a style="color: blue"

@@ -1,5 +1,7 @@
 package com.hg.book_mybatis.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hg.book_mybatis.dto.BookAddRequest;
+import com.hg.book_mybatis.entity.BookEntity;
 import com.hg.book_mybatis.service.BookService;
 
 @Controller
@@ -24,7 +27,9 @@ public class BookController {
 	}
 	
 	@GetMapping("/available_books")
-	public String displayAvailableBooks() {
+	public String displayAvailableBooks(Model model) {
+		List<BookEntity> bookEntities = bookService.fetchAllBooks();
+		model.addAttribute("books", bookEntities);
 		return "books/bookList";
 	}
 	

@@ -12,4 +12,8 @@
         	(#{name}, #{author}, #{price}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     </insert>
     
+    <!-- 全件検索 -->
+    <select id="fetchAllBooks" resultType="com.hg.book_mybatis.entity.BookEntity">
+    	SELECT * FROM books WHERE delete_date IS NULL
+    </select>
 </mapper>
