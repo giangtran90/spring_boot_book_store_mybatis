@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head_fragment(title = 'Book Register', links = ~{::link}, scripts = ~{::script})"></head>
+<body>
+	<nav th:replace="common/navbar :: nav_fragment()"></nav>
+	
+	<div class="container my-5 col-sm-6 offset-sm-3"
+		style="border: 1px solid black">
+		<h1 class="text-center py-2">New Book Register</h1>
+		<!-- <div th:if="${errors}">
+			<ul>
+				<li th:each="error : ${errors}"><span
+					th:text="${error.defaultMessage}"></span></li>
+			</ul>
+		</div> -->
+		<form class="px-4" th:action="@{/save}" method="post" id="myForm">
+			<div class="mb-3">
+				<label for="name" class="form-label">Name</label> <input type="text"
+					class="form-control" name="name" id="name">
+			</div>
+			<div class="mb-3">
+				<label for="author" class="form-label">Author</label> <input
+					type="text" class="form-control" name="author" id="author">
+			</div>
+			<div class="mb-3">
+				<label for="author" class="form-label">Price</label> <input
+					type="text" class="form-control" name="price">
+			</div>
+
+			<center class="py-3">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</center>
+		</form>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+
+			$('#myForm').submit(function(event) {
+				var isValid = true;
+				$('#name').each(function() {
+					var value = $(this).val();
+
+					if (value == "") {
+						alert("Please input value of name!");
+						isValid = false;
+						return isValid;
+					}		
+				});
+				$('#author').each(function() {
+					var value = $(this).val();
+
+					if (value == "") {
+						alert("Please input value of author!");
+						isValid = false;
+						return isValid;
+					}		
+				});
+				if (!isValid){
+					event.preventDefault();
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>
