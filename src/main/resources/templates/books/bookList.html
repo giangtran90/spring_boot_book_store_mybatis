@@ -3,7 +3,7 @@
 <head
 	th:replace="common/head :: head_fragment(title = 'Available Books', links = ~{::link}, scripts = ~{::script})"></head>
 <body>
-	<nav th:replace="common/navbar :: nav_fragment()"></nav>
+	<nav th:replace="common/navbar :: nav_fragment(home='/',availableBook='available_books',myBook='my_books',register='book_register')"></nav>
 	<div class="container my-5">
 		<form th:action="@{/search}" method="get">
 			Filter: <input type="text" name="keyword" id="keyword" size="50"

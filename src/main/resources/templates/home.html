@@ -3,7 +3,7 @@
 <head
 	th:replace="common/head :: head_fragment(title = 'Home', links = ~{::link}, scripts = ~{::script})"></head>
 <body>
-	<nav th:replace="common/navbar :: nav_fragment()"></nav>
+	<nav th:replace="common/navbar :: nav_fragment(home='/',availableBook='available_books',myBook='my_books',register='book_register')"></nav>
 	
 	<div class="container text-center my-5">
 		<h1>WELLCOME TO BOOK STORE</h1>
