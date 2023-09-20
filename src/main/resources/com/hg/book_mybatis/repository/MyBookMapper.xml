@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hg.book_mybatis.repository.MyBookMapper">
+
+	<!-- 新規 -->
+	<insert id="addMyBook">
+		INSERT INTO my_books
+		(id,name, author, price, create_date)
+		VALUES
+		(#{id}, #{name}, #{author}, #{price}, CURRENT_TIMESTAMP)
+	</insert>
+</mapper>

@@ -16,14 +16,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hg.book_mybatis.dto.BookAddRequest;
 import com.hg.book_mybatis.dto.BookUpdateRequest;
+import com.hg.book_mybatis.dto.MyBookAddRequest;
 import com.hg.book_mybatis.entity.BookEntity;
 import com.hg.book_mybatis.service.BookService;
+import com.hg.book_mybatis.service.MyBookService;
 
 @Controller
 public class BookController {
 
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private MyBookService myBookService;
 	
 	@GetMapping("/")
 	public String displayHome() {
@@ -40,6 +45,11 @@ public class BookController {
 	@GetMapping("/book_register")
 	public String displayBookRegister() {
 		return "books/bookRegister";
+	}
+	
+	@GetMapping("/my_books")
+	public String displayMyBook() {
+		return "books/myBooks";
 	}
 	
 	@PostMapping("/save")
@@ -82,6 +92,14 @@ public class BookController {
 	public String deleteBook(@PathVariable("id") Long id) {
 		bookService.deleteBookById(id);
 		return "redirect:/available_books";
+	}
+	
+	@RequestMapping("/my_list/{id}")
+	public String addMyBook(@PathVariable("id") Long id) {
+		BookEntity bookEntity = bookService.findBookById(id);
+		MyBookAddRequest myBookAddRequest = new MyBookAddRequest(bookEntity.getId(),bookEntity.getName(),bookEntity.getAuthor(),bookEntity.getPrice());
+		myBookService.addMyBook(myBookAddRequest);
+		return "redirect:/my_books";
 	}
 	
 }
