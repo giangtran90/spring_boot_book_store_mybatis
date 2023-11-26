@@ -18,7 +18,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="book, iteration : ${myBooks}">
+				<th:block th:each="book, iteration : ${myBookEntities}">
 					<tr>
 						<th scope="row" th:text="${iteration.count}"></th>
 						<td th:text="${book.name}"></td>

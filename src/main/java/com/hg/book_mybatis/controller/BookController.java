@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hg.book_mybatis.dto.BookAddRequest;
 import com.hg.book_mybatis.dto.BookUpdateRequest;
 import com.hg.book_mybatis.dto.MyBookAddRequest;
 import com.hg.book_mybatis.entity.BookEntity;
+import com.hg.book_mybatis.entity.MyBookEntity;
 import com.hg.book_mybatis.service.BookService;
 import com.hg.book_mybatis.service.MyBookService;
 
@@ -48,7 +50,9 @@ public class BookController {
 	}
 	
 	@GetMapping("/my_books")
-	public String displayMyBook() {
+	public String displayMyBook(Model model) {
+		List<MyBookEntity> myBookEntities = myBookService.fetchAllMyBooks();
+		model.addAttribute("myBookEntities", myBookEntities);
 		return "books/myBooks";
 	}
 	
